@@ -23,7 +23,7 @@ $(function() {
         alert(dados)
 
         $.ajax({
-            url: 'http://localhost:5000/add',
+            url: 'http://172.29.144.1:5000/add',
             type: 'POST',
             dataType: 'json',
             contentType: 'application/json',
