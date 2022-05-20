@@ -1,6 +1,9 @@
 from config import *
 from modelo import *
 
+@app.route("/")
+def rota_padrao():
+    return '<a href="/listar"></a>'
 
 @app.route("/listar")
 def listar():
@@ -10,11 +13,10 @@ def listar():
     resposta.headers.add("Access-Control-Allow-Origin", "*")
     return resposta
 
-@app.route("/incluir_dados", methods=['post'])
+@app.route("/add", methods=['post'])
 def incluir_dados():
     resposta = jsonify({"resultado": "ok", "detalhes": "ok"})
-    dados = request.get_json()
-    print(**dados)
+    dados = request.get_json()    
     try:
         nova = Estoque(**dados)
         db.session.add(nova)

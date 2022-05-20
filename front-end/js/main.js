@@ -1,5 +1,5 @@
 $(function() {
-    
+
     $(document).on("click", "#btnincluir", function() {
 
         nome = $("#camponome").val();
@@ -10,7 +10,7 @@ $(function() {
         reserva = $("#camporeserva").val();
 
         var dados = JSON.stringify(
-            {   
+            {
                 nome:nome,
                 situacao:situacao,
                 estado:estado,
@@ -20,14 +20,15 @@ $(function() {
             });
 
         console.log(dados)
+        alert(dados)
 
         $.ajax({
-            url: 'http://localhost:5000/incluir_dados',
+            url: 'http://localhost:5000/add',
             type: 'POST',
             dataType: 'json',
             contentType: 'application/json',
-            data: dados, 
-            success: incluir, 
+            data: dados,
+            success: incluir,
             error: retornar_erro
         });
         function incluir (retorno) {
