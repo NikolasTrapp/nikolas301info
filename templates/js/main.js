@@ -1,27 +1,23 @@
 $(function() {
 
-    $(document).on("click", "#btnincluir", function() {
+    $(document).on("click", "#botao_enviar", function() {
 
-        nome = $("#camponome").val();
-        situacao = $("#campostatus").val();
-        estado = $("#campoestado").val();
+        nome = $("#nome_equipamento").val();
         local = $("#campolocal").val();
         quantidade = $("#campoquantidade").val();
-        reserva = $("#camporeserva").val();
+        observacao = $("#campo_observacao").val();
 
         var dados = JSON.stringify(
             {
                 nome:nome,
-                situacao:situacao,
-                estado:estado,
                 local:local,
                 quantidade:quantidade,
-                reserva:reserva
+                observacao:observacao
             });
 
         $.ajax(
             {
-                url: "http://localhost:5000/add",
+                url: "http://localhost:5000/adicionar_equipamento",
                 type: "POST",
                 dataType: "json",
                 contentType: "application/json",
@@ -120,5 +116,25 @@ $(function() {
             alert("erro no back: "+retorno.resultado + ":" + retorno.detalhes);
         }
     
+    });
+
+    $(document).on("click", "#botao_listar", function() {
+        
+        $.ajax(
+            {
+                url: "http://localhost:5000/listar_equipamentos",
+                type: "GET",
+                success: return_resposta,
+                
+                error: function(erro){
+                    console.log(erro)
+                }
+            }
+        );
+
+        function return_resposta(resultado){
+            console.log(resultado)
+            console.log(typeof(resultado))
+        };
     });
 });

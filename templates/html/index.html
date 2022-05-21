@@ -15,18 +15,8 @@
         <form onsubmit="return false;">
 
             <div class="formulario">
-                <label for="camponome" class="form-class">Nome</label>
-                <input type="text" class="form-input" id="camponome">
-            </div>
-
-            <div class="formulario">
-                <label for="campostatus" class="form-class">Status</label>
-                <input type="text" class="form-input" id="campostatus">
-            </div>
-
-            <div class="formulario">
-                <label for="campoestado" class="form-class">Estado</label>
-                <input type="text" class="form-input" id="campoestado">
+                <label for="nome_equipamento" class="form-class">Nome</label>
+                <input type="text" class="form-input" id="nome_equipamento">
             </div>
 
             <div class="formulario">
@@ -36,16 +26,20 @@
             
             <div class="formulario">
                 <label for="campoquantidade" class="form-class">Quantidade</label>
-                <input type="text" class="form-input" id="campoquantidade">
+                <input type="number" class="form-input" id="campoquantidade">
             </div>
 
             <div class="formulario">
-                <label for="camporeserva" class="form-class">Reserva</label>
-                <input type="text" class="form-input" id="camporeserva">
+                <label for="campo_observacao" class="form-class">Observação</label>
+                <input type="text" class="form-input" id="campo_observacao">
             </div>
           
-            <button type="submit" class="btn btn-primary" id="btnincluir">Incluir</button>
+            <button type="submit" class="btn btn-primary" id="botao_enviar">Incluir</button>
         </form>
+        
+        <div class="lista">
+            <button type="submit", class="btn btn-secundary" id="botao_listar">Listar</button>
+        </div>
         
     </div>
 

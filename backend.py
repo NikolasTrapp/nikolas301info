@@ -49,13 +49,14 @@ def cadastrar():
     return resposta
 
 
-@app.route("/listar")
+@app.route("/listar_equipamentos")
 def listar():
     dados = db.session.query(Estoque).all()
     dados_em_json = [x.json() for x in dados]
     resposta = jsonify(dados_em_json)
     resposta.headers.add("Access-Control-Allow-Origin", "*")
     return resposta
+
 
 @app.route("/listar_cadastro")
 def listar_cadastro():
@@ -66,38 +67,27 @@ def listar_cadastro():
     return resposta
 
 
-@app.route("/add", methods=["POST"])
+@app.route("/adicionar_equipamento", methods=["POST"])
 def incluir_dados():
     resposta = jsonify({"resultado": "ok", "detalhes": "ok"})
     dados = request.get_json()
+    if not dados["observacao"].strip():
+        dados["observacao"] = "nenhuma"
     try:
-        nova = Estoque(
-                nome=dados["nome"],
-                status=dados["situacao"],
-                estado=dados["estado"],
+        equipamento = Estoque(
+                nome=dados["nome"].capitalize(),
                 local=dados["local"],
                 quantidade=dados["quantidade"],
-                reserva=dados["reserva"],
+                observacao=dados["observacao"].capitalize().strip()
             )
-        db.session.add(nova)
+        db.session.add(equipamento)
         db.session.commit()
+
     except Exception as e:
         resposta = jsonify({"resultado": "erro", "detalhes": str(e)})
+
     resposta.headers.add("Access-Control-Allow-Origin", "*")
     return resposta
-
-
-@app.route("/teste", methods=["GET", "POST"])
-def teste():
-    if request.method == "POST":
-        try:
-            request.get_json()
-        except Exception as e:
-            print(e)
-        return "você deu post e funcionou"
-    else:
-        return "Você deu get e funcionou"
-
 
 # host = 0.0.0.0
 app.run(debug=True)
