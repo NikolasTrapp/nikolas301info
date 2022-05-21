@@ -1,6 +1,6 @@
 from config import *
 from modelo import *
-lista = []
+
 
 @app.route("/")
 def rota_padrao():
@@ -12,14 +12,22 @@ def login():
     return render_template("html/login.html")
 
 
+@app.route("/cadastro")
+def cadastro():
+    return render_template("html/cadastro.html")
+
+
 @app.route("/logar", methods = ["POST"])
-def realizar_login():
+def logar():
     resposta = jsonify({"resultado": "ok", "detalhes": "login aprovado"})
     dados = request.get_json()
-    for i in db.session.execute("select * from cadastro"):
-        if dados["usuario"] != i[1] or dados["senha"] != i[2]:
-            resposta = jsonify({"resultado": "erro", "detalhes": "senha ou usuário inválidos!"})
-            return resposta
+    try:
+        cadastros = db.session.query(Cadastro).all()
+        lista_cadastros = [x.json() for x in cadastros]
+        if dados not in lista_cadastros:
+            resposta = jsonify({"resultado": "erro", "detalhes": "login negado"})
+    except Exception as e:
+        print(e)
     return resposta
 
 
@@ -29,7 +37,6 @@ def cadastrar():
     dados = request.get_json()
     try:
         for i in db.session.execute("select usuario from cadastro"):
-        
             if dados["usuario"] == i[0]:
                 resposta = jsonify({"resultado": "erro", "detalhes": "Usuario já consta no bd"})
                 return resposta
@@ -45,6 +52,14 @@ def cadastrar():
 @app.route("/listar")
 def listar():
     dados = db.session.query(Estoque).all()
+    dados_em_json = [x.json() for x in dados]
+    resposta = jsonify(dados_em_json)
+    resposta.headers.add("Access-Control-Allow-Origin", "*")
+    return resposta
+
+@app.route("/listar_cadastro")
+def listar_cadastro():
+    dados = db.session.query(Cadastro).all()
     dados_em_json = [x.json() for x in dados]
     resposta = jsonify(dados_em_json)
     resposta.headers.add("Access-Control-Allow-Origin", "*")

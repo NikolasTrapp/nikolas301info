@@ -19,9 +19,6 @@ $(function() {
                 reserva:reserva
             });
 
-        console.log(dados)
-        alert(dados)
-
         $.ajax(
             {
                 url: "http://localhost:5000/add",
@@ -91,8 +88,6 @@ $(function() {
         
         usuario = $("#user_cadastro").val();
         senha = $("#senha_cadastro").val();
-
-        alert(usuario, senha)
 
         var dados_do_login = JSON.stringify(
             {
