@@ -1,12 +1,14 @@
+from statistics import quantiles
+from flask_sqlalchemy import Model
 from config import *
 
 
 class Estoque(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(254))
-    local = db.Column(db.String(254))
-    quantidade = db.Column(db.Integer)
+    nome = db.Column(db.String(254), unique = True, nullable = False)
+    local = db.Column(db.String(254), nullable = False)
+    quantidade = db.Column(db.Integer, nullable = False)
     observacao = db.Column(db.String(254))
 
     def __str__(self) -> str:
@@ -39,6 +41,12 @@ class Cadastro(db.Model):
 if __name__ == "__main__":
 
     db.create_all()
+
+    #a = Estoque(nome = "Martelo", local = "b10", quantidade = "13", observacao="Observacao")
+    #db.session.add(a)
+
+    s = Cadastro(usuario = "Maria", senha = "12323")
+    db.session.add(s)
 
     #apagar tabelas
     #db.session.execute("drop table cadastro")

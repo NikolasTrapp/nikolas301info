@@ -132,19 +132,23 @@ $(function() {
             }
         );
 
-        function listar(pessoas){
+        function listar(equip){
             $('#tabelaequipamentos').html('')
-            console.log(typeof(pessoas))
-            for (var i in pessoas){
-                lin = '<tr>' +
-                '<td class="lihas">' + pessoas[i].nome + '</td>' +
-                '<td class="lihas">' + pessoas[i].local + '</td>' +
-                '<td class="lihas">' + pessoas[i].quantidade + '</td>' +
-                '<td class="lihas">' + pessoas[i].observacao + '</td>' +
-                '</tr>';
+            for (var i in equip){
+                lin = '<tr class="linhas_tabela">' +
+                '<td>' + equip[i].nome + '</td>' +
+                '<td>' + equip[i].local + '</td>' +
+                '<td>' + equip[i].quantidade + '</td>' +
+                '<td>' + equip[i].observacao + '</td>' +
+                '</tr>'
 
                 $('#tabelaequipamentos').append(lin);
             }
+            var valores = document.querySelectorAll('.linhas_tabela');
+            for (i = 0; i < valores.length; i++) {
+                console.log(valores[i].innerHTML);
+            }
+            
         };
     });
 });
