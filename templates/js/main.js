@@ -124,7 +124,7 @@ $(function() {
             {
                 url: "http://localhost:5000/listar_equipamentos",
                 type: "GET",
-                success: return_resposta,
+                success: listar,
                 
                 error: function(erro){
                     console.log(erro)
@@ -132,9 +132,19 @@ $(function() {
             }
         );
 
-        function return_resposta(resultado){
-            console.log(resultado)
-            console.log(typeof(resultado))
+        function listar(pessoas){
+            $('#tabelaequipamentos').html('')
+            console.log(typeof(pessoas))
+            for (var i in pessoas){
+                lin = '<tr>' +
+                '<td class="lihas">' + pessoas[i].nome + '</td>' +
+                '<td class="lihas">' + pessoas[i].local + '</td>' +
+                '<td class="lihas">' + pessoas[i].quantidade + '</td>' +
+                '<td class="lihas">' + pessoas[i].observacao + '</td>' +
+                '</tr>';
+
+                $('#tabelaequipamentos').append(lin);
+            }
         };
     });
 });
