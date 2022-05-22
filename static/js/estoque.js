@@ -1,3 +1,9 @@
+const body = document.body;
+const botao = document.createElement("button");
+const bt_txt = document.createTextNode("Enviar");
+botao.appendChild(bt_txt);
+body.appendChild(botao);
+
 $.ajax(
     {
         url: "http://localhost:5000/listar_equipamentos",
