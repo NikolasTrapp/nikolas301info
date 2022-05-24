@@ -154,7 +154,7 @@ $(document).on("click", "#botao_enviar", function() {
                     '<td id="td-qntd-1">' + dados[i].quantidade + '</td>' +
                     '<td id="td-obs-1">' + dados[i].observacao + '</td>' +
                     '<td><button class="botao-tabela" type="submit" id="1" onclick="botao_editar(this.id)">Editar</button></td>'+
-                    '<td><button class="botao-tabela" type="submit" id="1" onclick="botao_remover(this.id)">Remover</button></td>'+
+                    '<td><button class="botao-tabela" type="submit" id="td-rem-1" onclick="botao_remover(this.id)">Remover</button></td>'+
                     '</tr>';
                 lin2 = '<td class="linhas_tabela>"' +
                     '<td id="tr-input-nome"><input class="input-enviar" type="text" id="input-nome">'+
