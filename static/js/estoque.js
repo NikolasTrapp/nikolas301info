@@ -1,4 +1,4 @@
-nome_equipamento_atualizado = ""
+nome_antigo = ""
 $.ajax(
     {
         url: "http://localhost:5000/listar_equipamentos",
@@ -78,14 +78,17 @@ $(document).on("click", "#bt-enviar", function() {
 });
 
 function botao_editar(bt_id){
-    nome_equipamento_atualizado = document.querySelector("#td-nome-"+bt_id).innerHTML;
+    nome_antigo = document.querySelector("#td-nome-"+bt_id).innerHTML;
+    local_antigo = document.querySelector("#td-local-"+bt_id).innerHTML;
+    quantidade_antiga = document.querySelector("#td-qntd-"+bt_id).innerHTML;
+    observacao_antiga = document.querySelector("#td-obs-"+bt_id).innerHTML;
 
-    console.log(nome_equipamento_atualizado)
+    console.log(local_antigo)
 
-    document.getElementById("td-nome-"+bt_id).innerHTML = '<td><input class="input-enviar" type="text" id="input-editar-nome"></td>';
-    document.getElementById("td-local-"+bt_id).innerHTML = '<td><input class="input-enviar" type="text" id="input-editar-local"></td>';
-    document.getElementById("td-qntd-"+bt_id).innerHTML = '<td><input class="input-enviar" type="text" id="input-editar-qntd"></td>';
-    document.getElementById("td-obs-"+bt_id).innerHTML = '<td><input class="input-enviar" type="text" id="input-editar-obs"></td>';
+    document.getElementById("td-nome-"+bt_id).innerHTML = '<td><input class="input-enviar" type="text" id="input-editar-nome" value="'+nome_antigo+'"></td>';
+    document.getElementById("td-local-"+bt_id).innerHTML = '<td><input class="input-enviar" type="text" id="input-editar-local" value="'+local_antigo+'"></td>';
+    document.getElementById("td-qntd-"+bt_id).innerHTML = '<td><input class="input-enviar" type="text" id="input-editar-qntd" value="'+quantidade_antiga+'"></td>';
+    document.getElementById("td-obs-"+bt_id).innerHTML = '<td><input class="input-enviar" type="text" id="input-editar-obs" value="'+observacao_antiga+'"></td>';
     document.getElementById("td-rem-"+bt_id).innerHTML = '<td><button class="botao-tabela" type="submit" id="bt-update-enviar">Enviar</button></td>'
 }
 
@@ -186,7 +189,7 @@ $(document).on("click", "#bt-update-enviar", function() {
         local:local,
         quantidade:quantidade,
         observacao:observacao,
-        nome_antigo:nome_equipamento_atualizado
+        nome_antigo:nome_antigo
     });
         
     $.ajax(
