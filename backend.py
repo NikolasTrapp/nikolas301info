@@ -106,11 +106,30 @@ def remover_dados():
     con.close()
     return resposta
 
-@app.route("/buscar_equipamentos")
+@app.route("/buscar_equipamento")
 def buscar_dados():
     dados = db.session.query(Estoque).all()
     dados_em_json = [x.json() for x in dados]
     resposta = jsonify(dados_em_json)
+    resposta.headers.add("Access-Control-Allow-Origin", "*")
+    return resposta
+
+@app.route("/atualizar_equipamento", methods=["POST"])
+def atualizar_equipamento():
+    con = sqlite3.connect("estoque.db")
+    resposta = jsonify({"resultado": "ok", "detalhes": "ok"})
+    dados = request.get_json()
+    if not dados["observacao"].strip():
+        dados["observacao"] = "nenhuma"
+    tupla = (dados["nome"].capitalize(), dados["local"], dados["quantidade"], dados["observacao"].capitalize().strip(), dados["nome_antigo"])
+    print(tupla)
+    try:
+        con.execute("UPDATE ESTOQUE SET nome = ?, local = ?, quantidade = ?, observacao = ? where nome = ?",(tupla))
+        con.commit()
+
+    except Exception as e:
+        resposta = jsonify({"resultado": "erro", "detalhes": str(e)})
+
     resposta.headers.add("Access-Control-Allow-Origin", "*")
     return resposta
     
