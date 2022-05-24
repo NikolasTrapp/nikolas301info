@@ -58,21 +58,33 @@
             color: white;
         }
 
+        .input-enviar{
+            width: 120px;
+        }
+
     </style>
 
 </head>
 
 
-
 <body>
+    <div class="pesquisa">
+        <label for="campo_pesquisa" class="form-class">Buscar</label>
+        <input type="text" class="form-input" id="campo_pesquisa">
+      
+        <button type="submit" class="btn btn-primary" id="botao_enviar">Buscar</button>
+    </div>
+
     <div class="box">
-        <table class = "tabela">
+        <table class = "tabela", id="table" >
             <thead>
                 <tr>
                     <th scope="col">Nome</th>
                     <th scope="col">Local</th>
                     <th scope="col">Quantidade</th>
                     <th scope="col">Observação</th>
+                    <th scope="col">Editar</th>
+                    <th scope="col">Remover</th>
                 </tr>
             </thead>
             <tbody id = "tb-equipamentos">

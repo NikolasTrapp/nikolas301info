@@ -5,11 +5,11 @@ from config import *
 
 class Estoque(db.Model):
 
-    id = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(254), unique = True, nullable = False)
+    #id = db.Column(db.Integer)
+    nome = db.Column(db.String(254), unique = True, nullable = False, primary_key=True)
     local = db.Column(db.String(254), nullable = False)
     quantidade = db.Column(db.Integer, nullable = False)
-    observacao = db.Column(db.String(254))
+    observacao = db.Column(db.String(254), nullable = False)
 
     def __str__(self) -> str:
         return f"Nome: {self.nome} | Local: {self.local} | Quantidade: {self.quantidade} | Obs: {self.observacao}"
@@ -45,13 +45,13 @@ if __name__ == "__main__":
     #a = Estoque(nome = "Martelo", local = "b10", quantidade = "13", observacao="Observacao")
     #db.session.add(a)
 
-    s = Cadastro(usuario = "Maria", senha = "12323")
-    db.session.add(s)
+    #s = Cadastro(usuario = "Maria", senha = "12323")
+    #db.session.add(s)
 
     #apagar tabelas
     #db.session.execute("drop table cadastro")
     #db.session.execute("drop table estoque")
-    db.session.commit()
+    #db.session.commit()
 
     #remover dados cadastro
     #db.session.execute("delete from cadastro")
@@ -59,4 +59,7 @@ if __name__ == "__main__":
 
     #remover dados estoque
     #db.session.execute("delete from estoque")
+    #db.session.commit()
+    #nome = "Martelo"
+    #db.session.execute("delete from estoque where nome = %s"%nome)
     #db.session.commit()

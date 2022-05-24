@@ -1,5 +1,6 @@
 from config import *
 from modelo import *
+import sqlite3
 
 
 @app.route("/")
@@ -89,5 +90,29 @@ def incluir_dados():
     resposta.headers.add("Access-Control-Allow-Origin", "*")
     return resposta
 
+@app.route("/remover_equipamento", methods=["POST"])
+def remover_dados():
+    con = sqlite3.connect("estoque.db")
+    resposta = jsonify({"resultado": "ok", "detalhes": "ok"})
+    nome = request.get_json()
+    nome = nome["nome"]
+    try:
+        con.execute("delete from estoque where nome = ?", (nome,))
+        con.commit()
+    except Exception as e:
+        resposta = jsonify({"resultado": "erro", "detalhes": str(e)})
+
+    resposta.headers.add("Access-Control-Allow-Origin", "*")
+    con.close()
+    return resposta
+
+@app.route("/buscar_equipamentos")
+def buscar_dados():
+    dados = db.session.query(Estoque).all()
+    dados_em_json = [x.json() for x in dados]
+    resposta = jsonify(dados_em_json)
+    resposta.headers.add("Access-Control-Allow-Origin", "*")
+    return resposta
+    
 # host = 0.0.0.0
 app.run(debug=True)
