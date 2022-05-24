@@ -62,4 +62,4 @@ if __name__ == "__main__":
     #db.session.commit()
     #nome = "Martelo"
     #db.session.execute("delete from estoque where nome = %s"%nome)
-    #db.session.commit()
+    db.session.commit()

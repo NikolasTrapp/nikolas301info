@@ -5,7 +5,7 @@ import sqlite3
 
 @app.route("/")
 def rota_padrao():
-    return render_template("html/index.html")
+    return render_template("../templates/index.html")
 
 
 @app.route("/login")
